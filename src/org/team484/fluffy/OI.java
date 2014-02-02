@@ -1,14 +1,21 @@
 
 package org.team484.fluffy;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.team484.fluffy.commands.DriveMechanum;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+    Joystick driveStick = new Joystick(RobotMap.driveStick);
+    Joystick shootStick = new Joystick(RobotMap.shootStick);
+    
+    Button mechanum = new JoystickButton(driveStick, RobotMap.driveMechanumButton);
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -40,5 +47,8 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+    public OI() {
+        mechanum.whileHeld(new DriveMechanum());
+    }
 }
 
