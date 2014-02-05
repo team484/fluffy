@@ -29,4 +29,7 @@ public class RobotMap {
     public static final boolean backLeftInvert = false;
     public static final boolean frontRightInvert = false;
     public static final boolean backRightInvert = false;
+    
+    public static final int SolenoidOn = 1;
+    public static final int SolenoidOff = 2;
 }

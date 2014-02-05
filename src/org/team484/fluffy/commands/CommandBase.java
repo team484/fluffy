@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.OI;
 import org.team484.fluffy.subsystems.Drive;
 import org.team484.fluffy.subsystems.ExampleSubsystem;
+import org.team484.fluffy.subsystems.Shooter;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -17,6 +18,7 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static Drive drive = new Drive();
+    public static Shooter shooter = new Shooter();
     public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
    
 
