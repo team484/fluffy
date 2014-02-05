@@ -8,6 +8,7 @@
 package org.team484.fluffy;
 
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,7 +26,7 @@ import org.team484.fluffy.commands.ExampleCommand;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -33,7 +34,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
-
+        //Compressor compressor = new Compressor(RobotMap.pressureSwitch, RobotMap.compressorRelay);
+        //compressor.start();
         // Initialize all subsystems
         CommandBase.init();
     }

@@ -15,6 +15,6 @@ public class HighShot extends CommandGroup {
     
     public HighShot() {
         addSequential(new ShooterUp(), 1);
-        addSequential(new ShooterDown());
+        addSequential(new ShooterDown(), 0.01);
     }
 }

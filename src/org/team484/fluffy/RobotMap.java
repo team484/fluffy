@@ -19,17 +19,22 @@ public class RobotMap {
     public static final int driveStick = 1;
     public static final int shootStick = 2;
     
-    public static final int driveMechanumButton = 1;
+    public static final int driveMechanumButton = 1; //Drive Stick
+    public static final int lobButton = 3;
+    public static final int shootButton = 1; //Shoot Stick
     
-    public static final int frontLeftMotor = 1;
-    public static final int backLeftMotor = 2;
-    public static final int frontRightMotor = 3;
-    public static final int backRightMotor = 4;
+    public static final int frontLeftMotor = 1; //PWM
+    public static final int backLeftMotor = 2; //PWM
+    public static final int frontRightMotor = 3; //PWM
+    public static final int backRightMotor = 4; //PWM
     public static final boolean frontLeftInvert = false;
     public static final boolean backLeftInvert = false;
     public static final boolean frontRightInvert = false;
     public static final boolean backRightInvert = false;
     
-    public static final int SolenoidOn = 1;
-    public static final int SolenoidOff = 2;
+    public static final int solenoidOn = 1; //Solenoid Breakout
+    public static final int solenoidOff = 2; //Solenoid Breakout
+    
+    public static final int pressureSwitch = 1; //Digital IO
+    public static final int compressorRelay = 1; // Relay
 }
