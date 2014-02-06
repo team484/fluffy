@@ -24,10 +24,10 @@ public class RobotMap {
     public static final int shootHigh = 1; //Shoot Stick Button
     public static final int lobBall = 2; //Shoot Stick Button
     
-    public static final int frontLeftMotor = 1; //PWM port
-    public static final int backLeftMotor = 2; //PWM port
+    public static final int frontLeftMotor = 2; //PWM port
+    public static final int backLeftMotor = 4; //PWM port
     public static final int frontRightMotor = 3; //PWM port
-    public static final int backRightMotor = 4; //PWM port
+    public static final int backRightMotor = 1; //PWM port
     public static final boolean frontLeftInvert = false;
     public static final boolean backLeftInvert = false;
     public static final boolean frontRightInvert = true;
