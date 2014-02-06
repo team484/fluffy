@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.OI;
 import org.team484.fluffy.subsystems.Drive;
-import org.team484.fluffy.subsystems.ExampleSubsystem;
 import org.team484.fluffy.subsystems.Shooter;
 
 /**
@@ -19,7 +18,6 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static Drive drive = new Drive();
     public static Shooter shooter = new Shooter();
-    public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
    
 
     public static void init() {

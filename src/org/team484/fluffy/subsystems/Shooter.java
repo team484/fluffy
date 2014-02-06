@@ -17,8 +17,8 @@ import org.team484.fluffy.commands.ShooterDown;
 public class Shooter extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    Solenoid On = new Solenoid(RobotMap.SolenoidOn);
-    Solenoid Off = new Solenoid(RobotMap.SolenoidOff);
+    Solenoid On = new Solenoid(RobotMap.solenoidOn);
+    Solenoid Off = new Solenoid(RobotMap.solenoidOff);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
