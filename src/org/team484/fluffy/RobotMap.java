@@ -23,6 +23,9 @@ public class RobotMap {
     public static final int driveMechanumButton = 1; //Drive Stick Button
     public static final int shootHigh = 1; //Shoot Stick Button
     public static final int lobBall = 2; //Shoot Stick Button
+    public static final int lowerArm = 7; //Shoot Stick
+    public static final int raiseArm = 6; //Shoot Stick
+    public static final int pickupBall = 3; //Shoot Stick
     
     public static final int frontLeftMotor = 2; //PWM port
     public static final int backLeftMotor = 4; //PWM port
@@ -43,6 +46,9 @@ public class RobotMap {
     public static final int gyro = 1; //Gyro shold be slot 1 on analog input
     public static final int ir1 = 2; //Ball tracking IR analog input
     public static final int ir2 = 3; //Ball tracking IR analog input
+    public static final int camLED = 2; //Spike relay
     
-    public static final int pickupWheels = 5; //PWM for pickup wheel motor
+    public static final int pickupWheels = 3; //Spike for pickup wheel motor
+    public static final int pickupArmUp = 3; //Solenoid Breakout to lift arm up
+    public static final int pickupArmDown = 4; //Solenoid Breakout to let arm down
 }

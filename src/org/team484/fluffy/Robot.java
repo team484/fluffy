@@ -10,6 +10,7 @@ package org.team484.fluffy;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -22,6 +23,8 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
 
     public void robotInit() {
+        Relay camLED = new Relay(RobotMap.camLED);
+        camLED.set(Relay.Value.kForward);
         autonomousCommand = new Autonomous();
         CommandBase.init();
         Compressor compressor = new Compressor(RobotMap.pressureSwitch,RobotMap.compressorRelay);
