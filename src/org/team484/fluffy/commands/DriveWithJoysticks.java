@@ -1,20 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package org.team484.fluffy.commands;
 
 /**
  *
- * @author kevin
+ * @author Team484
  */
-public class DriveJoysticks extends CommandBase {
+public class DriveWithJoysticks extends CommandBase {
     
-    public DriveJoysticks() {
+    public DriveWithJoysticks() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(drive);
+        requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +22,11 @@ public class DriveJoysticks extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        drive.driveJoysticks();
+        if (oi.getDriveTrigger()) {
+            drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false);
+        } else {
+            drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -18,6 +18,7 @@ public class PickupArm extends Subsystem {
     // here. Call these from Commands.
     Solenoid armUp = new Solenoid(RobotMap.pickupArmUp);
     Solenoid armDown = new Solenoid(RobotMap.pickupArmDown);
+    boolean go = false;
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new PickupArmUp());
@@ -29,7 +30,12 @@ public class PickupArm extends Subsystem {
         
     }
     public void pickupArmUp() {
-        armUp.set(true);
-        armDown.set(false);
+       // if (this.go) {
+            armUp.set(true);
+            armDown.set(false);
+       // } else {
+            //armUp.set(false);
+            //armDown.set(true);
+        //this.go = !this.go;
     }
 }

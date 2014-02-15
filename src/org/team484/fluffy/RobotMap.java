@@ -27,28 +27,31 @@ public class RobotMap {
     public static final int raiseArm = 6; //Shoot Stick
     public static final int pickupBall = 3; //Shoot Stick
     
-    public static final int frontLeftMotor = 2; //PWM port
-    public static final int backLeftMotor = 4; //PWM port
-    public static final int frontRightMotor = 3; //PWM port
-    public static final int backRightMotor = 1; //PWM port
+    public static final int frontLeftMotor = 1; //PWM port
+    public static final int backLeftMotor = 3; //PWM port
+    public static final int frontRightMotor = 2; //PWM port
+    public static final int backRightMotor = 4; //PWM port
     public static final boolean frontLeftInvert = false;
     public static final boolean backLeftInvert = false;
     public static final boolean frontRightInvert = true;
     public static final boolean backRightInvert = true;
     
-    public static final int solenoidOn = 1; //Solenoid Breakout - Shooter
-    public static final int solenoidOff = 2; //Solenoid Breakout - Shooter
-    public static final int compressorRelay = 1; //Spike Relay
+    public static final int solenoidOn = 2; //Solenoid Breakout - Shooter
+    public static final int solenoidOff = 1; //Solenoid Breakout - Shooter
+    public static final int compressorRelay = 3; //Spike Relay
     public static final int pressureSwitch = 1; //Digital IO
     
-    public static final int encoderA = 2; //Digital Source 1 for encoder
-    public static final int encoderB = 3; //Digital Source 2 for encoder
+    //public static final int encoderA = 2; //Digital Source 1 for encoder
+    //public static final int encoderB = 3; //Digital Source 2 for encoder
     public static final int gyro = 1; //Gyro shold be slot 1 on analog input
     public static final int ir1 = 2; //Ball tracking IR analog input
     public static final int ir2 = 3; //Ball tracking IR analog input
-    public static final int camLED = 2; //Spike relay
+    public static final int echo = 2;
+    public static final int ping = 3;
+    public static final int camLED = 1; //Spike relay
     
-    public static final int pickupWheels = 3; //Spike for pickup wheel motor
+    public static final int pickupWheels = 2; //Spike for pickup wheel motor
     public static final int pickupArmUp = 3; //Solenoid Breakout to lift arm up
     public static final int pickupArmDown = 4; //Solenoid Breakout to let arm down
+    public static final double defaultDriveFromWall = 50;
 }

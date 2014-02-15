@@ -14,6 +14,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LobShot extends CommandGroup {
     
     public LobShot() {
-        addSequential(new ShooterUp(), 0.1);
+        addSequential(new ShooterUp(), 0.3);
     }
 }

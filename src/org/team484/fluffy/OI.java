@@ -4,7 +4,8 @@ package org.team484.fluffy;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.team484.fluffy.commands.DriveMechanum;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team484.fluffy.commands.DriveFromWall;
 import org.team484.fluffy.commands.HighShot;
 import org.team484.fluffy.commands.LobShot;
 import org.team484.fluffy.commands.PickupArmDown;
@@ -26,8 +27,17 @@ public class OI {
     Button lowerArm = new JoystickButton(shootStick, RobotMap.lowerArm);
     Button raiseArm = new JoystickButton(shootStick, RobotMap.raiseArm);
     Button pickupBall = new JoystickButton(shootStick, RobotMap.pickupBall);
+    Button driveFromWall = new JoystickButton(driveStick, 6);
+    public double getDriveX() {
+        return driveStick.getX();
+    }
+    public double getDriveY() {
+        return driveStick.getY();
+    }
+    public boolean getDriveTrigger() {
+        return driveStick.getTrigger();
+    }
     public OI() {
-        mechanum.whileHeld(new DriveMechanum());
         highShot.whenPressed(new HighShot());
         lobShot.whenPressed(new LobShot());
         lowerArm.whenPressed(new PickupArmDown());
@@ -36,6 +46,7 @@ public class OI {
         pickupBall.whileHeld(new PickupWheelOn());
         pickupBall.whenReleased(new PickupWheelOff());
         pickupBall.whenReleased(new PickupArmUp());
+        driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
     }
 }
 

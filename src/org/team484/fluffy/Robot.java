@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
         Relay camLED = new Relay(RobotMap.camLED);
-        camLED.set(Relay.Value.kForward);
+        camLED.set(Relay.Value.kReverse);
         autonomousCommand = new Autonomous();
         CommandBase.init();
         Compressor compressor = new Compressor(RobotMap.pressureSwitch,RobotMap.compressorRelay);
