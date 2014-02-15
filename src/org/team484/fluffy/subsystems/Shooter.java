@@ -17,8 +17,10 @@ import org.team484.fluffy.commands.ShooterDown;
 public class Shooter extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    Solenoid On = new Solenoid(RobotMap.solenoidOn);
-    Solenoid Off = new Solenoid(RobotMap.solenoidOff);
+    Solenoid OnL = new Solenoid(RobotMap.solenoidOnL);
+    Solenoid OffL = new Solenoid(RobotMap.solenoidOffL);
+    Solenoid OnR = new Solenoid(RobotMap.solenoidOnR);
+    Solenoid OffR = new Solenoid(RobotMap.solenoidOffR);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -26,16 +28,22 @@ public class Shooter extends Subsystem {
         
     }
     public void shooterDown() {
-        On.set(false);
-        Off.set(true);
+        OnL.set(false);
+        OffL.set(true);
+        OnR.set(false);
+        OffR.set(true);
         
     }
     public void shooterUp() {
-        On.set(true);
-        Off.set(false);
+        OnL.set(true);
+        OffL.set(false);
+        OnR.set(true);
+        OffR.set(false);
     }
     public void shooterOff() {
-        On.set(false);
-        Off.set(false);
+        OnL.set(false);
+        OffL.set(false);
+        OnR.set(false);
+        OffR.set(false);
     }
 }

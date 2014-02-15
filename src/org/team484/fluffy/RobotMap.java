@@ -36,8 +36,10 @@ public class RobotMap {
     public static final boolean frontRightInvert = true;
     public static final boolean backRightInvert = true;
     
-    public static final int solenoidOn = 2; //Solenoid Breakout - Shooter
-    public static final int solenoidOff = 1; //Solenoid Breakout - Shooter
+    public static final int solenoidOnL = 1; //Solenoid Breakout - Shooter Up Left
+    public static final int solenoidOffL = 3; //Solenoid Breakout - Shooter Down Left
+    public static final int solenoidOnR = 2; //Solenoid Breakout - Shooter Up Right
+    public static final int solenoidOffR = 4; //Solenoid Breakout - Shooter Down RIght
     public static final int compressorRelay = 3; //Spike Relay
     public static final int pressureSwitch = 1; //Digital IO
     
@@ -51,7 +53,7 @@ public class RobotMap {
     public static final int camLED = 1; //Spike relay
     
     public static final int pickupWheels = 2; //Spike for pickup wheel motor
-    public static final int pickupArmUp = 3; //Solenoid Breakout to lift arm up
-    public static final int pickupArmDown = 4; //Solenoid Breakout to let arm down
+    public static final int pickupArmUp = 6; //Solenoid Breakout to lift arm up
+    public static final int pickupArmDown = 5; //Solenoid Breakout to let arm down
     public static final double defaultDriveFromWall = 50;
 }
