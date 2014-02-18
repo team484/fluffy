@@ -28,7 +28,11 @@ public class DriveTrain extends PIDSubsystem {
     Joystick driveStick = new Joystick(RobotMap.driveStick);
     Ultrasonic sonic = new Ultrasonic(RobotMap.ping, RobotMap.echo);
     Gyro gyro = new Gyro(RobotMap.gyro);
+    boolean wasMech = false;
     protected DriverStation ds;
+    double old1 = 0;
+    double old2 = 0;
+    double old3 = 0;
     public DriveTrain() {
         super("DriveTrain", Kp, Ki, Kd);
 
@@ -53,16 +57,47 @@ public class DriveTrain extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return sonic.getRangeInches();
+        if (old1 == 0) {
+            old1 = sonic.getRangeInches();
+            old2 = sonic.getRangeInches();
+            old3 = sonic.getRangeInches();
+        } else {
+            old3 = old2;
+            old2 = old1;
+            old1 = sonic.getRangeInches();
+        }
+        if (old3 > old2 && old3 > old1) {
+            return old3;
+        } else if (old2 > old3 && old2 > old1) {
+            return old2;
+        } else {
+            return old1;
+        } 
     }
     
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
+        
         SmartDashboard.putNumber("Output", output);
-        mechanumDrive(0, output, 0, true);
+        mechanumDrive(0, output / 2, 0, true);
+    }
+    public void zeroGyro() {
+        gyro.reset();
     }
     public void mechanumDrive(double x, double y, double rotation, boolean auto) {
+        if (!(x == 0) || !this.wasMech) {
+            this.wasMech = true;
+            gyro.reset();
+        }
+        if (x == 0) {
+            this.wasMech = false;
+        }
+        if (auto || !(x == 0)) {
+            rotation = -(gyro.getAngle() / 200);
+        } else {
+            rotation = rotation * rotation * rotation;
+        }
         if (Math.abs(x) > Math.abs(y)) {
             y = 0;
         } else {

@@ -20,8 +20,7 @@ public abstract class CommandBase extends Command {
     public static Shooter shooter = new Shooter();
     public static PickupWheel pickupWheel = new PickupWheel();
     public static PickupArm pickupArm = new PickupArm();
-    public static DriveTrain drivetrain = new DriveTrain();
-   
+    public static DriveTrain drivetrain = new DriveTrain();   
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

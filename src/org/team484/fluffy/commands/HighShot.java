@@ -5,15 +5,34 @@
  */
 package org.team484.fluffy.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import org.team484.fluffy.RobotMap;
 
 /**
  *
  * @author kevin
  */
 public class HighShot extends CommandGroup {
-    
+    boolean wait = false;
+    long time = 0;
     public HighShot() {
+        addParallel(new PickupArmDown());
+        time = System.currentTimeMillis();
+        addParallel(new DontShoot(), 0.1);
+        if (time + 75 > System.currentTimeMillis()) {
+            wait = true;
+        } else {
+            wait = false;
+        }
+        addSequential(new DontShoot());
+        if (wait) {
+            addSequential(new WaitCommand(1), 1);
+        }
         addSequential(new ShooterUp(), 1);
+        addSequential(new ShooterDown(), 0.1);
+        addSequential(new WaitCommand(1), 1);
+        addSequential(new PickupArmUp(), 0.1);
     }
 }

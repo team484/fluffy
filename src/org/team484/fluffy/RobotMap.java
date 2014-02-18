@@ -42,6 +42,7 @@ public class RobotMap {
     public static final int solenoidOffR = 4; //Solenoid Breakout - Shooter Down RIght
     public static final int compressorRelay = 3; //Spike Relay
     public static final int pressureSwitch = 1; //Digital IO
+    public static final int contactSwitch = 4; //Digital IO
     
     //public static final int encoderA = 2; //Digital Source 1 for encoder
     //public static final int encoderB = 3; //Digital Source 2 for encoder
@@ -55,5 +56,5 @@ public class RobotMap {
     public static final int pickupWheels = 2; //Spike for pickup wheel motor
     public static final int pickupArmUp = 6; //Solenoid Breakout to lift arm up
     public static final int pickupArmDown = 5; //Solenoid Breakout to let arm down
-    public static final double defaultDriveFromWall = 50;
+    public static final double defaultDriveFromWall = 85;
 }

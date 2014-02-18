@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team484.fluffy.commands.Autonomous;
 import org.team484.fluffy.commands.DriveFromWall;
 import org.team484.fluffy.commands.HighShot;
 import org.team484.fluffy.commands.LobShot;
@@ -12,6 +13,7 @@ import org.team484.fluffy.commands.PickupArmDown;
 import org.team484.fluffy.commands.PickupArmUp;
 import org.team484.fluffy.commands.PickupWheelOff;
 import org.team484.fluffy.commands.PickupWheelOn;
+import org.team484.fluffy.commands.ZeroGyro;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,6 +30,7 @@ public class OI {
     Button raiseArm = new JoystickButton(shootStick, RobotMap.raiseArm);
     Button pickupBall = new JoystickButton(shootStick, RobotMap.pickupBall);
     Button driveFromWall = new JoystickButton(driveStick, 6);
+    Button autonomous = new JoystickButton(driveStick, 7);
     public double getDriveX() {
         return driveStick.getX();
     }
@@ -38,6 +41,7 @@ public class OI {
         return driveStick.getTrigger();
     }
     public OI() {
+        autonomous.whenPressed(new Autonomous());
         highShot.whenPressed(new HighShot());
         lobShot.whenPressed(new LobShot());
         lowerArm.whenPressed(new PickupArmDown());
@@ -46,6 +50,7 @@ public class OI {
         pickupBall.whileHeld(new PickupWheelOn());
         pickupBall.whenReleased(new PickupWheelOff());
         pickupBall.whenReleased(new PickupArmUp());
+        driveFromWall.whenPressed(new ZeroGyro());
         driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
     }
 }

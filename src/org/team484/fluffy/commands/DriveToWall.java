@@ -3,14 +3,13 @@
  * and open the template in the editor.
  */
 package org.team484.fluffy.commands;
-
 /**
  *
  * @author Team484
  */
-public class DriveFromWall extends CommandBase {
+public class DriveToWall extends CommandBase {
     double setpoint;
-    public DriveFromWall(double setpoint) {
+    public DriveToWall(double setpoint) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrain);
@@ -29,7 +28,7 @@ public class DriveFromWall extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(drivetrain.getPosition() - setpoint) < 2;
+        return drivetrain.getPosition() - setpoint > 0;
     }
 
     // Called once after isFinished returns true

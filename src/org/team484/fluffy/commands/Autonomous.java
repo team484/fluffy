@@ -8,7 +8,6 @@ package org.team484.fluffy.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team484.fluffy.RobotMap;
 
 /**
  *
@@ -16,21 +15,32 @@ import org.team484.fluffy.RobotMap;
  */
 public class Autonomous extends CommandGroup {
 
-    int blobs = 0;
-    int[] boxcoord = new int[17];
-
     public Autonomous() {
-        boolean target = false;
+        int blobs = -1;
+        int[] boxcoord = new int[17];
+        boolean target = true;
         boolean tryAgain = true;
-        addSequential(new WaitCommand(0.1)); //Wait for vision to update
+        addSequential(new ZeroGyro(), 0.3);
+        /*System.out.println("Zero-ing gyro");
+        
+        System.out.println("Finished Zero-ing");
+        addSequential(new WaitCommand(0.3), 0.3);
         //Check for target and set target to true if found
+        try {
         while (tryAgain) {
+            System.out.println("Trying");
+            while(blobs == -1){
+                System.out.println("Unset Blob count");
             try {
-                this.blobs = Integer.parseInt(SmartDashboard.getString("BLOB_COUNT"));
+                blobs = Integer.parseInt(SmartDashboard.getString("BLOB_COUNT"));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            if (this.blobs == 2) {
+            }
+            
+            /*
+            if (blobs == 2) {
+                System.out.println("2 blobs found");
                 String strCoords = SmartDashboard.getString("MEQ_COORDINATES");
                 int start = 0;
                 int count = 0;
@@ -43,26 +53,35 @@ public class Autonomous extends CommandGroup {
 
                     boxcoord[count++] = Integer.parseInt(str1.trim());
                     start = comma + 1;
+                    System.out.println("Setting coords");
                 }
                 if (boxcoord[9] + 20 > boxcoord[3] && boxcoord[15] < boxcoord[3] + 20) {
                     target = true;
                     tryAgain = false;
+                    System.out.println("GO!");
                 } else {
                     tryAgain = true;
+                    System.out.println("Not sure");
                 }
             } else {
                 target = false;
                 tryAgain = false;
+                System.out.println("No GO!");
             }
         }
-        if (target) {
-            addSequential(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
+        System.out.println("Decision Made");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }*/
+            addSequential(new isHot(), 4);
+           System.out.println("Driving From Wall");
+           addParallel(new PickupArmDown());
+           addSequential(new DriveFromWall(0), 1.7);
             //addSequential(new DriveDistance(30)); //inches to drive forward
-        } else {
-            addSequential(new WaitCommand(5));
-            addSequential(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
             //addSequential(new DriveDistance(30)); //inches to drive forward
-        }
-        addSequential(new HighShot());
+        //addSequential(new DriveToWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
+        //addSequential(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
+        addParallel(new HighShot());
+       //addSequential(new DriveFromWall(0), 0.5);
     }
 }

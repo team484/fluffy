@@ -8,38 +8,34 @@ package org.team484.fluffy.commands;
  *
  * @author Team484
  */
-public class DriveFromWall extends CommandBase {
-    double setpoint;
-    public DriveFromWall(double setpoint) {
+public class isHot extends CommandBase {
+    boolean isHot = false;
+    public isHot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(drivetrain);
-        this.setpoint = setpoint;
+        requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        drivetrain.setSetpoint(setpoint);
-        drivetrain.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        this.isHot = shooter.isHot();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(drivetrain.getPosition() - setpoint) < 2;
+        return this.isHot;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        drivetrain.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        drivetrain.disable();
     }
 }
