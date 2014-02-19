@@ -23,9 +23,9 @@ public class DriveWithJoysticks extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (oi.getDriveTrigger()) {
-            drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false);
+            drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false, true);
         } else {
-            drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false);
+            drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false, false);
         }
     }
 

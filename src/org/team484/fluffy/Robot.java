@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.commands.Autonomous;
 import org.team484.fluffy.commands.CommandBase;
 
@@ -21,13 +22,14 @@ import org.team484.fluffy.commands.CommandBase;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+    Compressor compressor;
 
     public void robotInit() {
         Relay camLED = new Relay(RobotMap.camLED);
         camLED.set(Relay.Value.kReverse);
         autonomousCommand = new Autonomous();
         CommandBase.init();
-        Compressor compressor = new Compressor(RobotMap.pressureSwitch,RobotMap.compressorRelay);
+        compressor = new Compressor(RobotMap.pressureSwitch,RobotMap.compressorRelay);
         compressor.start();
     }
 
@@ -45,9 +47,11 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putBoolean("Pressure Gauge",compressor.getPressureSwitchValue());
     }
     
     public void testPeriodic() {
+        
         LiveWindow.run();
     }
 }

@@ -20,7 +20,7 @@ public class Autonomous extends CommandGroup {
         int[] boxcoord = new int[17];
         boolean target = true;
         boolean tryAgain = true;
-        addSequential(new ZeroGyro(), 0.3);
+        addSequential(new ZeroGyro(), 0.2);
         /*System.out.println("Zero-ing gyro");
         
         System.out.println("Finished Zero-ing");
@@ -73,7 +73,7 @@ public class Autonomous extends CommandGroup {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }*/
-            addSequential(new isHot(), 4);
+            addSequential(new isHot(), 3.5);
            System.out.println("Driving From Wall");
            addParallel(new PickupArmDown());
            addSequential(new DriveFromWall(0), 1.7);

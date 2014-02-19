@@ -41,7 +41,7 @@ public class OI {
         return driveStick.getTrigger();
     }
     public OI() {
-        autonomous.whenPressed(new Autonomous());
+        //autonomous.whenPressed(new Autonomous());
         highShot.whenPressed(new HighShot());
         lobShot.whenPressed(new LobShot());
         lowerArm.whenPressed(new PickupArmDown());
@@ -50,8 +50,8 @@ public class OI {
         pickupBall.whileHeld(new PickupWheelOn());
         pickupBall.whenReleased(new PickupWheelOff());
         pickupBall.whenReleased(new PickupArmUp());
-        driveFromWall.whenPressed(new ZeroGyro());
-        driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
+        //driveFromWall.whenPressed(new ZeroGyro());
+        //driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
     }
 }
 

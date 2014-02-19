@@ -80,20 +80,20 @@ public class DriveTrain extends PIDSubsystem {
         // e.g. yourMotor.set(output);
         
         SmartDashboard.putNumber("Output", output);
-        mechanumDrive(0, output / 2, 0, true);
+        mechanumDrive(0, output / 2, 0, true, false);
     }
     public void zeroGyro() {
         gyro.reset();
     }
-    public void mechanumDrive(double x, double y, double rotation, boolean auto) {
-        if (!(x == 0) || !this.wasMech) {
+    public void mechanumDrive(double x, double y, double rotation, boolean auto, boolean mechanum) {
+        if (mechanum && !this.wasMech) {
             this.wasMech = true;
             gyro.reset();
         }
-        if (x == 0) {
+        if (!mechanum) {
             this.wasMech = false;
         }
-        if (auto || !(x == 0)) {
+        if (auto || mechanum) {
             rotation = -(gyro.getAngle() / 200);
         } else {
             rotation = rotation * rotation * rotation;
@@ -107,11 +107,12 @@ public class DriveTrain extends PIDSubsystem {
             robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
         }
         
-        
+        if (sonic.getRangeInches() > 32 && sonic.getRangeInches() < 72) {
+            SmartDashboard.putBoolean("Shoot", true);
+        } else {
+            SmartDashboard.putBoolean("Shoot", false);
+        }
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
-        SmartDashboard.putNumber("X", x);
-        SmartDashboard.putNumber("Y", y);
-        SmartDashboard.putNumber("Gyro Rate", gyro.getRate());
         SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());
         SmartDashboard.putNumber("voltage", ds.getBatteryVoltage());
         //System.out.println(SmartDashboard.getString("DriveFromWall"));
