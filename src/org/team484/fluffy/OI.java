@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.commands.Autonomous;
 import org.team484.fluffy.commands.DriveFromWall;
 import org.team484.fluffy.commands.HighShot;
+import org.team484.fluffy.commands.KickerIn;
+import org.team484.fluffy.commands.KickerOut;
 import org.team484.fluffy.commands.LobShot;
 import org.team484.fluffy.commands.PickupArmDown;
 import org.team484.fluffy.commands.PickupArmUp;
@@ -31,6 +33,8 @@ public class OI {
     Button pickupBall = new JoystickButton(shootStick, RobotMap.pickupBall);
     Button driveFromWall = new JoystickButton(driveStick, 6);
     Button autonomous = new JoystickButton(driveStick, 7);
+    Button magTest = new JoystickButton(shootStick, 8);
+    Button kickerOut = new JoystickButton(driveStick, 2);
     public double getDriveX() {
         return driveStick.getX();
     }
@@ -42,6 +46,9 @@ public class OI {
     }
     public OI() {
         //autonomous.whenPressed(new Autonomous());
+        //highShot.whenPressed(new PickupArmDown()); //added
+        //lobShot.whenPressed(new PickupArmDown()); //added
+        //pickupBall.whenPressed(new PickupArmDown()); //added
         highShot.whenPressed(new HighShot());
         lobShot.whenPressed(new LobShot());
         lowerArm.whenPressed(new PickupArmDown());
@@ -49,7 +56,9 @@ public class OI {
         pickupBall.whenPressed(new PickupArmDown());
         pickupBall.whileHeld(new PickupWheelOn());
         pickupBall.whenReleased(new PickupWheelOff());
-        pickupBall.whenReleased(new PickupArmUp());
+        pickupBall.whenPressed(new PickupArmDown());
+        kickerOut.whileHeld(new KickerOut());
+        kickerOut.whenReleased(new KickerIn());
         //driveFromWall.whenPressed(new ZeroGyro());
         //driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
     }

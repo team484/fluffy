@@ -55,10 +55,14 @@ public class Shooter extends Subsystem {
         return allowShot.get();
     }
     public boolean isHot() {
+        try {
         if (Integer.parseInt(SmartDashboard.getString("BLOB_COUNT", "0")) < 2) {
             return false;
         } else {
             return true;
+        }
+        } catch (Exception e) {
+            return false;
         }
     }
 }

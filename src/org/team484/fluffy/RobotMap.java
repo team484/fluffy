@@ -43,6 +43,9 @@ public class RobotMap {
     public static final int compressorRelay = 3; //Spike Relay
     public static final int pressureSwitch = 1; //Digital IO
     public static final int contactSwitch = 4; //Digital IO
+    public static final int magnetSpike = 4; //Spike Relay
+    public static final int kickerOn = 7; //Solenoid Sub
+    public static final int kickerOff = 8; //Solenoid Sub
     
     //public static final int encoderA = 2; //Digital Source 1 for encoder
     //public static final int encoderB = 3; //Digital Source 2 for encoder

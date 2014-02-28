@@ -76,7 +76,7 @@ public class Autonomous extends CommandGroup {
             addSequential(new isHot(), 3.5);
            System.out.println("Driving From Wall");
            addParallel(new PickupArmDown());
-           addSequential(new DriveFromWall(0), 1.7);
+           addSequential(new DriveFromWall(-100), 1.7);
             //addSequential(new DriveDistance(30)); //inches to drive forward
             //addSequential(new DriveDistance(30)); //inches to drive forward
         //addSequential(new DriveToWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));

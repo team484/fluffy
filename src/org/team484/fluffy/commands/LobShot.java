@@ -20,7 +20,7 @@ public class LobShot extends CommandGroup {
     public LobShot() {
         addParallel(new PickupArmDown());
         time = System.currentTimeMillis();
-        addParallel(new DontShoot(), 0.1);
+        addSequential(new DontShoot(), 0.1);
         if (time + 75 > System.currentTimeMillis()) {
             wait = true;
         } else {
@@ -28,7 +28,7 @@ public class LobShot extends CommandGroup {
         }
         addSequential(new DontShoot());
         if (wait) {
-            addSequential(new WaitCommand(1), 1);
+            addSequential(new WaitCommand(0.5), 0.5);
         }
         addSequential(new ShooterUp(), 0.3);
         addSequential(new ShooterDown(), 0.1);

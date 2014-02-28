@@ -3,6 +3,7 @@ package org.team484.fluffy.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.team484.fluffy.OI;
 import org.team484.fluffy.subsystems.DriveTrain;
+import org.team484.fluffy.subsystems.Kicker;
 import org.team484.fluffy.subsystems.PickupArm;
 import org.team484.fluffy.subsystems.PickupWheel;
 import org.team484.fluffy.subsystems.Shooter;
@@ -21,6 +22,7 @@ public abstract class CommandBase extends Command {
     public static PickupWheel pickupWheel = new PickupWheel();
     public static PickupArm pickupArm = new PickupArm();
     public static DriveTrain drivetrain = new DriveTrain();   
+    public static Kicker kicker = new Kicker();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
