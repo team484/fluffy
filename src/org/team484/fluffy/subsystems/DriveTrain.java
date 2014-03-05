@@ -57,6 +57,7 @@ public class DriveTrain extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
+        if (sonic.getRangeInches() > 0) {
         if (old1 == 0) {
             old1 = sonic.getRangeInches();
             old2 = sonic.getRangeInches();
@@ -73,6 +74,9 @@ public class DriveTrain extends PIDSubsystem {
         } else {
             return old1;
         } 
+        } else {
+            return 100;
+        }
     }
     
     protected void usePIDOutput(double output) {
