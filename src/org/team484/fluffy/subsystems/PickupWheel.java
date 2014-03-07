@@ -28,4 +28,7 @@ public class PickupWheel extends Subsystem {
     public void pickupWheelOn() {
         wheels.set(Relay.Value.kReverse);
     }
+    public void pickupWheelBack() {
+        wheels.set(Relay.Value.kForward);
+    }
 }

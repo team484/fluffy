@@ -26,6 +26,7 @@ public class RobotMap {
     public static final int lowerArm = 7; //Shoot Stick
     public static final int raiseArm = 6; //Shoot Stick
     public static final int pickupBall = 3; //Shoot Stick
+    public static final int pickupWheelBack = 10; //Shoot Stick
     
     public static final int frontLeftMotor = 1; //PWM port
     public static final int backLeftMotor = 3; //PWM port
