@@ -4,11 +4,10 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package org.team484.fluffy;
 
-
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,23 +17,57 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.commands.Autonomous;
 import org.team484.fluffy.commands.CommandBase;
 
-
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     Compressor compressor;
+    protected DriverStation ds;
+    Relay LEDs;
 
     public void robotInit() {
         Relay camLED = new Relay(RobotMap.camLED);
+        LEDs = new Relay(RobotMap.spikeLED);
+        ds = DriverStation.getInstance();
+        System.out.println(ds.getAlliance().value);
+        if (ds.getAlliance().value == 0) {
+            //Red Team
+            System.out.println("Go Red!");
+            try {
+                LEDs.set(Relay.Value.kReverse);
+            } catch (Exception e) {
+            }
+        } else {
+            //Blue Team
+            System.out.println("Go Blue!");
+            try {
+                LEDs.set(Relay.Value.kForward);
+            } catch (Exception e) {
+            }
+        }
         camLED.set(Relay.Value.kReverse);
         autonomousCommand = new Autonomous();
         CommandBase.init();
-        compressor = new Compressor(RobotMap.pressureSwitch,RobotMap.compressorRelay);
+        compressor = new Compressor(RobotMap.pressureSwitch, RobotMap.compressorRelay);
         compressor.start();
     }
 
     public void autonomousInit() {
         autonomousCommand.start();
+        if (ds.getAlliance().value == 0) {
+            //Red Team
+            System.out.println("Go Red!");
+            try {
+                LEDs.set(Relay.Value.kReverse);
+            } catch (Exception e) {
+            }
+        } else {
+            //Blue Team
+            System.out.println("Go Blue!");
+            try {
+                LEDs.set(Relay.Value.kForward);
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void autonomousPeriodic() {
@@ -42,16 +75,30 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-        
+        if (ds.getAlliance().value == 0) {
+            //Red Team
+            System.out.println("Go Red!");
+            try {
+                LEDs.set(Relay.Value.kReverse);
+            } catch (Exception e) {
+            }
+        } else {
+            //Blue Team
+            System.out.println("Go Blue!");
+            try {
+                LEDs.set(Relay.Value.kForward);
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putBoolean("Pressure Gauge",compressor.getPressureSwitchValue());
+        SmartDashboard.putBoolean("Pressure Gauge", compressor.getPressureSwitchValue());
     }
-    
+
     public void testPeriodic() {
-        
+
         LiveWindow.run();
     }
 }

@@ -56,6 +56,7 @@ public class RobotMap {
     public static final int echo = 2;
     public static final int ping = 3;
     public static final int camLED = 1; //Spike relay
+    public static final int spikeLED = 4; //Spike relay
     
     public static final int pickupWheels = 2; //Spike for pickup wheel motor
     public static final int pickupArmUp = 6; //Solenoid Breakout to lift arm up
