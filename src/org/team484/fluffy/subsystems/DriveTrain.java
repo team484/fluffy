@@ -89,7 +89,16 @@ public class DriveTrain extends PIDSubsystem {
     public void zeroGyro() {
         gyro.reset();
     }
-    public void mechanumDrive(double x, double y, double rotation, boolean auto, boolean mechanum) {
+    public void autoMechDrive() {
+        double rotation = -(gyro.getAngle() / 200);
+        //System.out.println("Gyro: "+gyro.getAngle() + " rotation: "+rotation);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, RobotMap.frontLeftInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, RobotMap.backLeftInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, RobotMap.frontRightInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, RobotMap.backRightInvert);
+        robotDrive.mecanumDrive_Cartesian(0, -0.5, rotation, 0);
+    }
+    public void mechanumDrive(double x, double y, double rotation, boolean autonomous, boolean mechanum) {
         if (mechanum && !this.wasMech) {
             this.wasMech = true;
             gyro.reset();
@@ -97,28 +106,29 @@ public class DriveTrain extends PIDSubsystem {
         if (!mechanum) {
             this.wasMech = false;
         }
-        if (auto || mechanum) {
+        if (autonomous || mechanum) {
             rotation = -(gyro.getAngle() / 200);
         } else {
             rotation = rotation * rotation * rotation;
+            //System.out.println("Rotation: " + rotation);
         }
         if (Math.abs(x) > Math.abs(y)) {
             y = 0;
         } else {
             x = 0;
         }
-        if (!(auto && sonic.getRangeInches() < 2)) {
+        if (!(autonomous && sonic.getRangeInches() < 2)) {
             robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
         }
         
-        if (sonic.getRangeInches() > 32 && sonic.getRangeInches() < 72) {
+        if (sonic.getRangeInches() > 42 && sonic.getRangeInches() < 52) {
             SmartDashboard.putBoolean("Shoot", true);
         } else {
             SmartDashboard.putBoolean("Shoot", false);
         }
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
         SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());
-        SmartDashboard.putNumber("voltage", ds.getBatteryVoltage());
+        //SmartDashboard.putNumber("voltage", ds.getBatteryVoltage());
         //System.out.println(SmartDashboard.getString("DriveFromWall"));
     }
 }

@@ -9,6 +9,7 @@ package org.team484.fluffy;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -23,9 +24,11 @@ public class Robot extends IterativeRobot {
     Compressor compressor;
     protected DriverStation ds;
     Relay LEDs;
-
+    Joystick drive = new Joystick(RobotMap.driveStick);
+    double counter = 0;
     public void robotInit() {
         Relay camLED = new Relay(RobotMap.camLED);
+        
         LEDs = new Relay(RobotMap.spikeLED);
         ds = DriverStation.getInstance();
         System.out.println(ds.getAlliance().value);
@@ -52,7 +55,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        autonomousCommand.start();
+        //autonomousCommand.start();
         if (ds.getAlliance().value == 0) {
             //Red Team
             System.out.println("Go Red!");
@@ -95,6 +98,36 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         SmartDashboard.putBoolean("Pressure Gauge", compressor.getPressureSwitchValue());
+        /**try {
+            if (drive.getZ() + 1 < 0.1) {
+                if (ds.getAlliance().value == 0) {
+            //Red Team
+            try {
+                LEDs.set(Relay.Value.kReverse);
+            } catch (Exception e) {
+            }
+        } else {
+            //Blue Team
+            try {
+                LEDs.set(Relay.Value.kForward);
+            } catch (Exception e) {
+            }
+        }
+            } else {
+                if (counter < 5) {
+                    counter = counter + drive.getZ() + 1;
+                } else {
+                    counter = 0;
+                    if (LEDs.get() == Relay.Value.kForward) {
+                        LEDs.set(Relay.Value.kReverse);
+                    } else {
+                        LEDs.set(Relay.Value.kForward);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            
+        }**/
     }
 
     public void testPeriodic() {

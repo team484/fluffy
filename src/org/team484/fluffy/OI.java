@@ -40,6 +40,9 @@ public class OI {
     public double getDriveX() {
         return driveStick.getX();
     }
+    public double getDriveZ() {
+        return driveStick.getZ();
+    }
     public double getDriveY() {
         return driveStick.getY();
     }
