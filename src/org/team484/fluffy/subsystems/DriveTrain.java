@@ -121,7 +121,7 @@ public class DriveTrain extends PIDSubsystem {
             robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
         }
         
-        if (sonic.getRangeInches() > 42 && sonic.getRangeInches() < 52) {
+        if (sonic.getRangeInches() > 30 && sonic.getRangeInches() < 70) {
             SmartDashboard.putBoolean("Shoot", true);
         } else {
             SmartDashboard.putBoolean("Shoot", false);

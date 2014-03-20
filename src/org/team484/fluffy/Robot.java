@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        //autonomousCommand.start();
+        autonomousCommand.start();
         if (ds.getAlliance().value == 0) {
             //Red Team
             System.out.println("Go Red!");
