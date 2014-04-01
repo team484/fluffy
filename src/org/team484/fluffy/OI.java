@@ -14,6 +14,7 @@ import org.team484.fluffy.commands.LobShot;
 import org.team484.fluffy.commands.PickupArmDown;
 import org.team484.fluffy.commands.PickupArmUp;
 import org.team484.fluffy.commands.PickupWheelBack;
+import org.team484.fluffy.commands.PickupWheelHalf;
 import org.team484.fluffy.commands.PickupWheelOff;
 import org.team484.fluffy.commands.PickupWheelOn;
 import org.team484.fluffy.commands.ZeroGyro;
@@ -37,6 +38,7 @@ public class OI {
     Button magTest = new JoystickButton(shootStick, 8);
     Button kickerOut = new JoystickButton(driveStick, 2);
     Button pickupWheelBack = new JoystickButton(shootStick, RobotMap.pickupWheelBack);
+    Button pickupWheelHalf = new JoystickButton(driveStick, 7);
     public double getDriveX() {
         return driveStick.getX();
     }

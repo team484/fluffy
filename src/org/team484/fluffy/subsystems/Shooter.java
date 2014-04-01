@@ -5,6 +5,7 @@
  */
 package org.team484.fluffy.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,21 +25,43 @@ public class Shooter extends Subsystem {
     Solenoid OnR = new Solenoid(RobotMap.solenoidOnR);
     Solenoid OffR = new Solenoid(RobotMap.solenoidOffR);
     DigitalInput allowShot = new DigitalInput(RobotMap.contactSwitch);
+    AnalogChannel ballIR = new AnalogChannel(2);
+    boolean shooterBall = true;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new ShooterDown());
         
     }
+    public void setShootBall() {
+        if (ballIR.getValue() > 190) {
+            shooterBall = true;
+        } else {
+            shooterBall = false;
+        }
+    }
     public void shooterDown() {
         OnL.set(false);
         OffL.set(true);
         OnR.set(false);
         OffR.set(true);
+        if (ballIR.getValue() > 190) {
+            SmartDashboard.putBoolean("No Ball", false);
+            SmartDashboard.putBoolean("Ball Good", true);
+            SmartDashboard.putString("Ball Status", "Good To Go");
+        } else if (ballIR.getValue() > 110) {
+            SmartDashboard.putBoolean("No Ball", false);
+            SmartDashboard.putBoolean("Ball Good", false);
+            SmartDashboard.putString("Ball Status", "Kick It, Son!");
+        } else {
+            SmartDashboard.putBoolean("No Ball", true);
+            SmartDashboard.putBoolean("Ball Good", false);
+            SmartDashboard.putString("Ball Status", "Grab a Ball");
+        }
         
     }
     public void shooterUp() {
-        if (allowShot.get()) {
+        if (allowShot.get() && shooterBall) {
             OnL.set(true);
             OffL.set(false);
             OnR.set(true);

@@ -29,6 +29,7 @@ public class DriveTrain extends PIDSubsystem {
     Ultrasonic sonic = new Ultrasonic(RobotMap.ping, RobotMap.echo);
     Gyro gyro = new Gyro(RobotMap.gyro);
     boolean wasMech = false;
+    boolean startAuto = true;
     protected DriverStation ds;
     double old1 = 0;
     double old2 = 0;
@@ -90,7 +91,11 @@ public class DriveTrain extends PIDSubsystem {
         gyro.reset();
     }
     public void autoMechDrive() {
-        double rotation = -(gyro.getAngle() / 200);
+        if (startAuto) {
+            gyro.reset();
+            startAuto = false;
+        }
+        double rotation = -(gyro.getAngle() / 160);
         //System.out.println("Gyro: "+gyro.getAngle() + " rotation: "+rotation);
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, RobotMap.frontLeftInvert);
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, RobotMap.backLeftInvert);
@@ -123,8 +128,10 @@ public class DriveTrain extends PIDSubsystem {
         
         if (sonic.getRangeInches() > 30 && sonic.getRangeInches() < 70) {
             SmartDashboard.putBoolean("Shoot", true);
+            SmartDashboard.putString("Can Shoot", "Ready To Shoot");
         } else {
             SmartDashboard.putBoolean("Shoot", false);
+            SmartDashboard.putString("Can Shoot", "Don't Shoot");
         }
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
         SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());

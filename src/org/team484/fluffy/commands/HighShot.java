@@ -8,6 +8,7 @@ package org.team484.fluffy.commands;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.RobotMap;
 
 /**
@@ -30,9 +31,10 @@ public class HighShot extends CommandGroup {
         if (wait) {
             addSequential(new WaitCommand(0.5), 0.5);
         }
+        addSequential(new SetShootBall(), 0.1);
         addSequential(new ShooterUp(), 1);
         addSequential(new ShooterDown(), 0.1);
-        addSequential(new WaitCommand(1), 1);
-        addSequential(new PickupArmUp(), 0.1);
+        //addSequential(new WaitCommand(1), 1);
+        //addSequential(new PickupArmUp(), 0.1);
     }
 }
