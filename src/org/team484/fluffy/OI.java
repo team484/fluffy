@@ -73,6 +73,7 @@ public class OI {
         pickupWheelBack.whileHeld(new PickupWheelBack());
         followBall.whileHeld(new FindAndPickup());
         followBall.whenPressed(new ZeroGyro());
+        followBall.whenReleased(new PickupArmDown());
         safetyOverride.whenPressed(new DontShoot());
         //driveFromWall.whenPressed(new ZeroGyro());
         //driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));

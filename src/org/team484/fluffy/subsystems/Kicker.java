@@ -34,9 +34,12 @@ public class Kicker extends Subsystem {
         kickerOff.set(true);
     }
     public void kickerChecked() {
-        if (!SmartDashboard.getBoolean("Ball Good", false)) {
+        if (!SmartDashboard.getBoolean("Ball Good", false) && !SmartDashboard.getBoolean("No Ball", false)) {
             kickerOn.set(true);
             kickerOff.set(false);
+        } else {
+            kickerOn.set(false);
+            kickerOff.set(true);
         }
     }
 }
