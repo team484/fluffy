@@ -51,8 +51,8 @@ public class RobotMap {
     //public static final int encoderA = 2; //Digital Source 1 for encoder
     //public static final int encoderB = 3; //Digital Source 2 for encoder
     public static final int gyro = 1; //Gyro shold be slot 1 on analog input
-    public static final int ir1 = 2; //Ball tracking IR analog input
-    public static final int ir2 = 3; //Ball tracking IR analog input
+    public static final int ir1 = 3; //Ball tracking IR analog input
+    public static final int ir2 = 4; //Ball tracking IR analog input
     public static final int echo = 2;
     public static final int ping = 3;
     public static final int camLED = 1; //Spike relay

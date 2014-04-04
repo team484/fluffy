@@ -7,7 +7,9 @@ package org.team484.fluffy.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.RobotMap;
@@ -26,6 +28,9 @@ public class Shooter extends Subsystem {
     Solenoid OffR = new Solenoid(RobotMap.solenoidOffR);
     DigitalInput allowShot = new DigitalInput(RobotMap.contactSwitch);
     AnalogChannel ballIR = new AnalogChannel(2);
+    Joystick shootStick = new Joystick(RobotMap.shootStick);
+    JoystickButton safetyOverride = new JoystickButton(shootStick, 11);
+
     boolean shooterBall = true;
 
     public void initDefaultCommand() {
@@ -61,7 +66,7 @@ public class Shooter extends Subsystem {
         
     }
     public void shooterUp() {
-        if (allowShot.get() && shooterBall) {
+        if ((allowShot.get() && shooterBall) || safetyOverride.get()) {
             OnL.set(true);
             OffL.set(false);
             OnR.set(true);
@@ -75,7 +80,11 @@ public class Shooter extends Subsystem {
         OffR.set(false);
     }
     public boolean dontShoot() {
-        return allowShot.get();
+        if (safetyOverride.get()) {
+            return true;
+        } else {
+            return allowShot.get();
+        }
     }
     public boolean isHot() {
         try {

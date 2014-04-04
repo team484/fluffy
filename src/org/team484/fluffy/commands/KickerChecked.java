@@ -8,12 +8,12 @@ package org.team484.fluffy.commands;
  *
  * @author Team484
  */
-public class ZeroGyro extends CommandBase {
-    boolean isZerod = false;
-    public ZeroGyro() {
+public class KickerChecked extends CommandBase {
+    
+    public KickerChecked() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(drivetrain);
+        requires(kicker);
     }
 
     // Called just before this Command runs the first time
@@ -22,12 +22,12 @@ public class ZeroGyro extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        this.isZerod = drivetrain.zeroGyro();
+        kicker.kickerChecked();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return this.isZerod;
+        return false;
     }
 
     // Called once after isFinished returns true

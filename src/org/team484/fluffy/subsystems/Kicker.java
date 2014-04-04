@@ -6,6 +6,7 @@ package org.team484.fluffy.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.RobotMap;
 import org.team484.fluffy.commands.KickerIn;
 
@@ -31,5 +32,11 @@ public class Kicker extends Subsystem {
     public void kickerIn() {
         kickerOn.set(false);
         kickerOff.set(true);
+    }
+    public void kickerChecked() {
+        if (!SmartDashboard.getBoolean("Ball Good", false)) {
+            kickerOn.set(true);
+            kickerOff.set(false);
+        }
     }
 }

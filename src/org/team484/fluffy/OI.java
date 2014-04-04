@@ -6,7 +6,10 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.commands.Autonomous;
+import org.team484.fluffy.commands.DontShoot;
 import org.team484.fluffy.commands.DriveFromWall;
+import org.team484.fluffy.commands.FindAndPickup;
+import org.team484.fluffy.commands.FollowBall;
 import org.team484.fluffy.commands.HighShot;
 import org.team484.fluffy.commands.KickerIn;
 import org.team484.fluffy.commands.KickerOut;
@@ -38,7 +41,8 @@ public class OI {
     Button magTest = new JoystickButton(shootStick, 8);
     Button kickerOut = new JoystickButton(driveStick, 2);
     Button pickupWheelBack = new JoystickButton(shootStick, RobotMap.pickupWheelBack);
-    Button pickupWheelHalf = new JoystickButton(driveStick, 7);
+    Button followBall = new JoystickButton(driveStick, 7);
+    Button safetyOverride = new JoystickButton(shootStick, 11);
     public double getDriveX() {
         return driveStick.getX();
     }
@@ -67,6 +71,9 @@ public class OI {
         kickerOut.whileHeld(new KickerOut());
         kickerOut.whenReleased(new KickerIn());
         pickupWheelBack.whileHeld(new PickupWheelBack());
+        followBall.whileHeld(new FindAndPickup());
+        followBall.whenPressed(new ZeroGyro());
+        safetyOverride.whenPressed(new DontShoot());
         //driveFromWall.whenPressed(new ZeroGyro());
         //driveFromWall.whileHeld(new DriveFromWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));
     }

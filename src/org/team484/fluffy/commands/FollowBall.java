@@ -4,13 +4,15 @@
  */
 package org.team484.fluffy.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  * @author Team484
  */
-public class ZeroGyro extends CommandBase {
-    boolean isZerod = false;
-    public ZeroGyro() {
+public class FollowBall extends CommandBase {
+    
+    public FollowBall() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(drivetrain);
@@ -22,12 +24,12 @@ public class ZeroGyro extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        this.isZerod = drivetrain.zeroGyro();
+        drivetrain.followBall();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return this.isZerod;
+        return !SmartDashboard.getBoolean("No Ball", true);
     }
 
     // Called once after isFinished returns true

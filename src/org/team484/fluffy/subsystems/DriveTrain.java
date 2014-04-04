@@ -4,6 +4,8 @@
  */
 package org.team484.fluffy.subsystems;
 
+import com.sun.squawk.util.MathUtils;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,6 +30,8 @@ public class DriveTrain extends PIDSubsystem {
     Joystick driveStick = new Joystick(RobotMap.driveStick);
     Ultrasonic sonic = new Ultrasonic(RobotMap.ping, RobotMap.echo);
     Gyro gyro = new Gyro(RobotMap.gyro);
+    AnalogChannel leftIR = new AnalogChannel(RobotMap.ir1);
+    AnalogChannel rightIR = new AnalogChannel(RobotMap.ir2);
     boolean wasMech = false;
     boolean startAuto = true;
     protected DriverStation ds;
@@ -87,8 +91,9 @@ public class DriveTrain extends PIDSubsystem {
         SmartDashboard.putNumber("Output", output);
         mechanumDrive(0, output / 2, 0, true, false);
     }
-    public void zeroGyro() {
+    public boolean zeroGyro() {
         gyro.reset();
+        return true;
     }
     public void autoMechDrive() {
         if (startAuto) {
@@ -102,6 +107,38 @@ public class DriveTrain extends PIDSubsystem {
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, RobotMap.frontRightInvert);
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, RobotMap.backRightInvert);
         robotDrive.mecanumDrive_Cartesian(0, -0.5, rotation, 0);
+    }
+    public void followBall() {
+        double rotation = -(gyro.getAngle() / 160);
+        double speed = 0;
+        int currentLeft = leftIR.getValue();
+        int currentRight = rightIR.getValue();
+        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627);
+        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627);
+        System.out.println("Left: " + leftIn + " Right: " + rightIn);
+        if ((leftIn < 40 || rightIn < 40) && SmartDashboard.getBoolean("No Ball", true)) {
+            double mech = MathUtils.log(Math.abs(leftIn - rightIn)) / 20;
+            if (leftIn - rightIn < 0) {
+                mech = 0 - mech;
+            }
+            if (mech > 0.5) {
+                mech = 0.5;
+            } else if (mech < -0.5) {
+                mech = -0.5;
+            } else if (mech > -0.1 && mech < 0) {
+                mech = 0;
+            } else if (mech > 0 && mech < 0.1) {
+                mech = 0;
+            }
+            if (leftIn < rightIn && leftIn > 12) {
+                speed = (leftIn - 12) / 20;
+            } else if (leftIn > rightIn && rightIn > 12) {
+                speed = (rightIn - 12) / 20;
+            } else {
+                speed = 0;
+            }
+            robotDrive.mecanumDrive_Cartesian(mech, speed, rotation, 0);
+        }
     }
     public void mechanumDrive(double x, double y, double rotation, boolean autonomous, boolean mechanum) {
         if (mechanum && !this.wasMech) {
