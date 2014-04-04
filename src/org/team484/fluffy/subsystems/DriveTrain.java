@@ -95,6 +95,10 @@ public class DriveTrain extends PIDSubsystem {
         gyro.reset();
         return true;
     }
+    public boolean setStartAuto() {
+        startAuto = true;
+        return true;
+    }
     public void autoMechDrive() {
         if (startAuto) {
             gyro.reset();
@@ -107,6 +111,19 @@ public class DriveTrain extends PIDSubsystem {
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, RobotMap.frontRightInvert);
         robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, RobotMap.backRightInvert);
         robotDrive.mecanumDrive_Cartesian(0, -0.5, rotation, 0);
+    }
+        public void autoMechDriveBack() {
+        if (startAuto) {
+            gyro.reset();
+            startAuto = false;
+        }
+        double rotation = -(gyro.getAngle() / 160);
+        //System.out.println("Gyro: "+gyro.getAngle() + " rotation: "+rotation);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, RobotMap.frontLeftInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, RobotMap.backLeftInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, RobotMap.frontRightInvert);
+        robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, RobotMap.backRightInvert);
+        robotDrive.mecanumDrive_Cartesian(0, 0.5, rotation, 0);
     }
     public void followBall() {
         double rotation = -(gyro.getAngle() / 160);

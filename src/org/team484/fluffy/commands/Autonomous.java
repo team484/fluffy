@@ -16,12 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Autonomous extends CommandGroup {
 
     public Autonomous() {
-        int blobs = -1;
-        int[] boxcoord = new int[17];
-        boolean target = true;
-        boolean tryAgain = true;
         addSequential(new WaitCommand(0.6), 0.6);
         addSequential(new ZeroGyro(), 0.2);
+        addSequential(new SetStartAuto());
         /*System.out.println("Zero-ing gyro");
         
         System.out.println("Finished Zero-ing");

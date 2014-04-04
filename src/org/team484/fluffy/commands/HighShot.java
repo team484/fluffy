@@ -29,7 +29,7 @@ public class HighShot extends CommandGroup {
         }
         addSequential(new DontShoot());
         if (wait) {
-            addSequential(new WaitCommand(0.5), 0.5);
+            addSequential(new WaitCommand(0.4), 0.4);
         }
         addSequential(new SetShootBall(), 0.1);
         addSequential(new ShooterUp(), 1);
