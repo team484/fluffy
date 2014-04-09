@@ -133,7 +133,7 @@ public class DriveTrain extends PIDSubsystem {
         double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627);
         double rightIn = (MathUtils.pow(currentRight, -1.22)*6627);
         System.out.println("Left: " + leftIn + " Right: " + rightIn);
-        if ((leftIn < 40 || rightIn < 40) && SmartDashboard.getBoolean("No Ball", true)) {
+        if ((leftIn < 32 || rightIn < 32) && SmartDashboard.getBoolean("No Ball", true)) {
             double mech = MathUtils.log(Math.abs(leftIn - rightIn)) / 20;
             if (leftIn - rightIn < 0) {
                 mech = 0 - mech;
@@ -155,6 +155,40 @@ public class DriveTrain extends PIDSubsystem {
                 speed = 0;
             }
             robotDrive.mecanumDrive_Cartesian(mech, speed, rotation, 0);
+        }
+    }
+    public void followBallTele() {
+        double rotation = -(gyro.getAngle() / 160);
+        double speed = 0;
+        int currentLeft = leftIR.getValue();
+        int currentRight = rightIR.getValue();
+        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627);
+        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627);
+        System.out.println("Left: " + leftIn + " Right: " + rightIn);
+        if ((leftIn < 38 || rightIn < 38) && SmartDashboard.getBoolean("No Ball", true)) {
+            double mech = MathUtils.log(Math.abs(leftIn - rightIn)) / 20;
+            if (leftIn - rightIn < 0) {
+                mech = 0 - mech;
+            }
+            if (mech > 0.5) {
+                mech = 0.5;
+            } else if (mech < -0.5) {
+                mech = -0.5;
+            } else if (mech > -0.1 && mech < 0) {
+                mech = 0;
+            } else if (mech > 0 && mech < 0.1) {
+                mech = 0;
+            }
+            if (leftIn < rightIn && leftIn > 12) {
+                speed = (leftIn - 12) / 20;
+            } else if (leftIn > rightIn && rightIn > 12) {
+                speed = (rightIn - 12) / 20;
+            } else {
+                speed = 0;
+            }
+            robotDrive.mecanumDrive_Cartesian(mech, speed, rotation, 0);
+        } else {
+            robotDrive.mecanumDrive_Cartesian(0, driveStick.getY(), driveStick.getX(), 0);
         }
     }
     public void mechanumDrive(double x, double y, double rotation, boolean autonomous, boolean mechanum) {

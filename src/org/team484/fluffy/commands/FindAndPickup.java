@@ -33,8 +33,8 @@ public class FindAndPickup extends CommandGroup {
         addSequential(new ZeroGyro(), 0.1);
         addParallel(new PickupArmDown());
         addParallel(new PickupWheelOn());
-        addSequential(new WaitCommand(0.8), 0.8);
-        addSequential(new FollowBall());
+        //addSequential(new WaitCommand(0.8), 0.8);
+        addSequential(new FollowBallTele());
         addParallel(new PickupWheelOn());
         addSequential (new WaitCommand(0.5), 0.5);
         addSequential(new KickerChecked(), 0.3);

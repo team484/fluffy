@@ -32,7 +32,7 @@ public class LobShot extends CommandGroup {
         }
         addSequential(new SetShootBall(), 0.1);
         addSequential(new ShooterUp(), 0.29);
-        addSequential(new ShooterDown(), 0.1);
+        addParallel(new ShooterDown());
         //addSequential(new WaitCommand(1), 1);
         //addSequential(new PickupArmUp(), 0.1);
     }

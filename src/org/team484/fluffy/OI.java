@@ -20,6 +20,7 @@ import org.team484.fluffy.commands.PickupWheelBack;
 import org.team484.fluffy.commands.PickupWheelHalf;
 import org.team484.fluffy.commands.PickupWheelOff;
 import org.team484.fluffy.commands.PickupWheelOn;
+import org.team484.fluffy.commands.SetShootBall;
 import org.team484.fluffy.commands.ZeroGyro;
 
 /**
@@ -41,7 +42,7 @@ public class OI {
     Button magTest = new JoystickButton(shootStick, 8);
     Button kickerOut = new JoystickButton(driveStick, 2);
     Button pickupWheelBack = new JoystickButton(shootStick, RobotMap.pickupWheelBack);
-    Button followBall = new JoystickButton(driveStick, 7);
+    Button followBall = new JoystickButton(driveStick, 3);
     Button safetyOverride = new JoystickButton(shootStick, 11);
     public double getDriveX() {
         return driveStick.getX();
@@ -60,8 +61,10 @@ public class OI {
         //highShot.whenPressed(new PickupArmDown()); //added
         //lobShot.whenPressed(new PickupArmDown()); //added
         //pickupBall.whenPressed(new PickupArmDown()); //added
-        highShot.whenPressed(new HighShot());
-        lobShot.whenPressed(new LobShot());
+        highShot.whileHeld(new HighShot());
+        highShot.whenReleased(new PickupArmDown());
+        lobShot.whileHeld(new LobShot());
+        lobShot.whenReleased(new PickupArmDown());
         lowerArm.whenPressed(new PickupArmDown());
         raiseArm.whenPressed(new PickupArmUp());
         pickupBall.whenPressed(new PickupArmDown());

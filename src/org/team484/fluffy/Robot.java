@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.commands.Autonomous;
+import org.team484.fluffy.commands.Autonomous2;
 import org.team484.fluffy.commands.CommandBase;
 
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+    Command autonomous2Command;
     Compressor compressor;
     protected DriverStation ds;
     Relay LEDs;
@@ -49,13 +51,18 @@ public class Robot extends IterativeRobot {
         }
         camLED.set(Relay.Value.kReverse);
         autonomousCommand = new Autonomous();
+        autonomous2Command = new Autonomous2();
         CommandBase.init();
         compressor = new Compressor(RobotMap.pressureSwitch, RobotMap.compressorRelay);
         compressor.start();
     }
 
     public void autonomousInit() {
-        autonomousCommand.start();
+        if (ds.getDigitalIn(1)) {
+            autonomousCommand.start();
+        } else {
+            autonomous2Command.start();
+        }
         if (ds.getAlliance().value == 0) {
             //Red Team
             System.out.println("Go Red!");
@@ -78,6 +85,8 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+        autonomous2Command.cancel();
+        autonomousCommand.cancel();
         if (ds.getAlliance().value == 0) {
             //Red Team
             System.out.println("Go Red!");
