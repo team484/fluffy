@@ -130,10 +130,10 @@ public class DriveTrain extends PIDSubsystem {
         double speed = 0;
         int currentLeft = leftIR.getValue();
         int currentRight = rightIR.getValue();
-        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627);
-        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627);
+        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627) / 0.533333333;
+        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627) / 0.533333333;
         System.out.println("Left: " + leftIn + " Right: " + rightIn);
-        if ((leftIn < 32 || rightIn < 32) && SmartDashboard.getBoolean("No Ball", true)) {
+        if ((leftIn < 64 || rightIn < 64) && SmartDashboard.getBoolean("No Ball", true)) {
             double mech = MathUtils.log(Math.abs(leftIn - rightIn)) / 20;
             if (leftIn - rightIn < 0) {
                 mech = 0 - mech;
@@ -155,17 +155,25 @@ public class DriveTrain extends PIDSubsystem {
                 speed = 0;
             }
             robotDrive.mecanumDrive_Cartesian(mech, speed, rotation, 0);
-        }
+        } /**else {
+            double vector = ds.getAnalogIn(1);
+            if (vector < 1.5) {
+                robotDrive.mecanumDrive_Cartesian(0.5, 0, rotation, 0);
+            } else if (vector > 3.5) {
+                robotDrive.mecanumDrive_Cartesian(-0.5, 0, rotation, 0);
+            }
+        }**/
     }
     public void followBallTele() {
         double rotation = -(gyro.getAngle() / 160);
         double speed = 0;
         int currentLeft = leftIR.getValue();
         int currentRight = rightIR.getValue();
-        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627);
-        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627);
-        System.out.println("Left: " + leftIn + " Right: " + rightIn);
-        if ((leftIn < 38 || rightIn < 38) && SmartDashboard.getBoolean("No Ball", true)) {
+        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627) / 0.533333333;
+        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627) / 0.533333333;
+        //System.out.println("Left: " + leftIn + " Right: " + rightIn);
+        System.out.println("Left: " + leftIn + " Right: " +rightIn);
+        if ((leftIn < 64 || rightIn < 64) && SmartDashboard.getBoolean("No Ball", true)) {
             double mech = MathUtils.log(Math.abs(leftIn - rightIn)) / 20;
             if (leftIn - rightIn < 0) {
                 mech = 0 - mech;
@@ -188,10 +196,16 @@ public class DriveTrain extends PIDSubsystem {
             }
             robotDrive.mecanumDrive_Cartesian(mech, speed, rotation, 0);
         } else {
-            robotDrive.mecanumDrive_Cartesian(0, driveStick.getY(), driveStick.getX(), 0);
+            robotDrive.mecanumDrive_Cartesian(0, driveStick.getY(), MathUtils.pow(driveStick.getX(), 3), 0);
         }
+        SmartDashboard.putNumber("Match Time", 230 - ds.getMatchTime());
     }
     public void mechanumDrive(double x, double y, double rotation, boolean autonomous, boolean mechanum) {
+        int currentLeft = leftIR.getValue();
+        int currentRight = rightIR.getValue();
+        double leftIn = (MathUtils.pow(currentLeft, -1.22)*6627) / 0.53333333;
+        double rightIn = (MathUtils.pow(currentRight, -1.22)*6627) / 0.533333333;
+        //System.out.println("Left: " + leftIn + " Right: " + rightIn);
         if (mechanum && !this.wasMech) {
             this.wasMech = true;
             gyro.reset();
@@ -221,6 +235,7 @@ public class DriveTrain extends PIDSubsystem {
             SmartDashboard.putBoolean("Shoot", false);
             SmartDashboard.putString("Can Shoot", "Don't Shoot");
         }
+        SmartDashboard.putNumber("Match Time", 230 - ds.getMatchTime());
         SmartDashboard.putNumber("Gyro", gyro.getAngle());
         SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());
         //SmartDashboard.putNumber("voltage", ds.getBatteryVoltage());
