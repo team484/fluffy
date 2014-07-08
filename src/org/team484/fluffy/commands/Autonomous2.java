@@ -19,19 +19,20 @@ public class Autonomous2 extends CommandGroup {
         addParallel(new PickupArmDown());
         addSequential(new DriveForTime(), 1.6);
         addSequential(new WaitCommand(0.5), 0.5);
-        addSequential(new ShooterUp(), 1);
+        addSequential(new ShooterUp(), 0.8);
         addParallel(new ShooterDown());
         addSequential(new DriveForTimeBack(), 1.6);
         addParallel(new PickupWheelOn());
-        addSequential(new FollowBall(), 1.9);
+        addSequential(new FollowBall(), 2.5);
         addParallel(new PickupWheelOn());
-        addSequential(new KickerChecked(), 0.3);
-        addParallel (new KickerIn());
+        //addSequential(new KickerChecked(), 0.3);
+        //addParallel (new KickerIn());
+        addSequential(new DriveForTime(), 0.7);
         addParallel(new PickupWheelOff());
-        addSequential(new DriveForTime(), 1.7);
+        addSequential(new DriveForTime(), 1.0);
         addSequential(new WaitCommand(0.5), 0.5);
         addSequential(new SetShootBall(), 0.05);
-        addSequential(new ShooterUp(), 1);
+        addSequential(new ShooterUp(), 0.8);
         addParallel(new ShooterDown());
     }
 }

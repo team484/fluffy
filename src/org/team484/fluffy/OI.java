@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team484.fluffy.commands.AfterShot;
 import org.team484.fluffy.commands.Autonomous;
 import org.team484.fluffy.commands.DontShoot;
 import org.team484.fluffy.commands.DriveFromWall;
@@ -62,13 +63,14 @@ public class OI {
         //lobShot.whenPressed(new PickupArmDown()); //added
         //pickupBall.whenPressed(new PickupArmDown()); //added
         highShot.whileHeld(new HighShot());
-        highShot.whenReleased(new PickupArmDown());
+        highShot.whenReleased(new AfterShot());
         lobShot.whileHeld(new LobShot());
-        lobShot.whenReleased(new PickupArmDown());
+        lobShot.whenReleased(new AfterShot());
         lowerArm.whenPressed(new PickupArmDown());
         raiseArm.whenPressed(new PickupArmUp());
         pickupBall.whenPressed(new PickupArmDown());
         pickupBall.whileHeld(new PickupWheelOn());
+        pickupBall.whileHeld(new PickupArmDown());
         pickupBall.whenReleased(new PickupWheelOff());
         pickupBall.whenPressed(new PickupArmDown());
         kickerOut.whileHeld(new KickerOut());
@@ -76,6 +78,7 @@ public class OI {
         pickupWheelBack.whileHeld(new PickupWheelBack());
         followBall.whileHeld(new FindAndPickup());
         followBall.whenPressed(new ZeroGyro());
+        followBall.whileHeld(new PickupArmDown());
         followBall.whenReleased(new PickupArmDown());
         safetyOverride.whenPressed(new DontShoot());
         //driveFromWall.whenPressed(new ZeroGyro());

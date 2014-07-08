@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Autonomous extends CommandGroup {
 
     public Autonomous() {
-        addSequential(new WaitCommand(0.6), 0.6);
+        addSequential(new WaitCommand(0.6), 0.8);
         addSequential(new ZeroGyro(), 0.2);
         addSequential(new SetStartAuto());
         /*System.out.println("Zero-ing gyro");
@@ -77,6 +77,7 @@ public class Autonomous extends CommandGroup {
            addParallel(new PickupArmDown());
            //addSequential(new DriveFromWall(0), 1.9);
            addSequential(new DriveForTime(), 1.6);
+           addSequential(new WaitCommand(0.4), 0.4);
             //addSequential(new DriveDistance(30)); //inches to drive forward
             //addSequential(new DriveDistance(30)); //inches to drive forward
         //addSequential(new DriveToWall(SmartDashboard.getNumber("DriveFromWall", RobotMap.defaultDriveFromWall)));

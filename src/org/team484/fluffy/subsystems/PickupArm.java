@@ -6,6 +6,7 @@ package org.team484.fluffy.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team484.fluffy.RobotMap;
 import org.team484.fluffy.commands.PickupArmUp;
 
@@ -37,5 +38,11 @@ public class PickupArm extends Subsystem {
             //armUp.set(false);
             //armDown.set(true);
         //this.go = !this.go;
+    }
+    public void pickupArmUpChecked() {
+        if (SmartDashboard.getBoolean("No Ball", true)) {
+            armUp.set(true);
+            armDown.set(false);
+        }
     }
 }
