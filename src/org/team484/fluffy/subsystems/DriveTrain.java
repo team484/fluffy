@@ -226,6 +226,8 @@ public class DriveTrain extends PIDSubsystem {
         }
         if (!(autonomous && sonic.getRangeInches() < 2)) {
             robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
+        } else {
+            robotDrive.mecanumDrive_Cartesian(0, 0, 0, 0);
         }
         
         if (sonic.getRangeInches() > 30 && sonic.getRangeInches() < 70) {
@@ -240,5 +242,18 @@ public class DriveTrain extends PIDSubsystem {
         SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());
         //SmartDashboard.putNumber("voltage", ds.getBatteryVoltage());
         //System.out.println(SmartDashboard.getString("DriveFromWall"));
+    }
+    public void LeapDrive(double x, double y, double rot) {
+        robotDrive.mecanumDrive_Cartesian(x, y, rot, 0);
+        if (sonic.getRangeInches() > 30 && sonic.getRangeInches() < 70) {
+            SmartDashboard.putBoolean("Shoot", true);
+            SmartDashboard.putString("Can Shoot", "Ready To Shoot");
+        } else {
+            SmartDashboard.putBoolean("Shoot", false);
+            SmartDashboard.putString("Can Shoot", "Don't Shoot");
+        }
+        SmartDashboard.putNumber("Match Time", 230 - ds.getMatchTime());
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+        SmartDashboard.putNumber("UltraSonic", sonic.getRangeInches());
     }
 }

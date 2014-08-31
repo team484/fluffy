@@ -4,6 +4,8 @@
  */
 package org.team484.fluffy.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  * @author Team484
@@ -22,10 +24,34 @@ public class DriveWithJoysticks extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (oi.getDriveTrigger()) {
-            drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false, true);
+        if (SmartDashboard.getNumber("Status", 0) > 0) {
+            if (SmartDashboard.getNumber("Status", 0) == 1) {
+                if (SmartDashboard.getBoolean("AllowRot", false)) {
+                    //Rotation only
+                    drivetrain.LeapDrive(0, 0, SmartDashboard.getNumber("Rot", 0));
+                } else {
+                    if (oi.getDriveTrigger()) {
+                        drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false, true);
+                    } else {
+                        drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false, false);
+                    }
+                }
+            } else if (SmartDashboard.getNumber("Status", 0) == 2) {
+                //Rotation and Drive
+                drivetrain.LeapDrive(SmartDashboard.getNumber("DriveX", 0), SmartDashboard.getNumber("DriveY", 0), SmartDashboard.getNumber("Rot", 0));
+            } else {
+               if (oi.getDriveTrigger()) {
+                    drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false, true);
+                } else {
+                    drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false, false);
+                } 
+            }
         } else {
-            drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false, false);
+            if (oi.getDriveTrigger()) {
+                drivetrain.mechanumDrive(oi.getDriveX(), oi.getDriveY(), 0, false, true);
+            } else {
+                drivetrain.mechanumDrive(0, oi.getDriveY(), oi.getDriveX(), false, false);
+            }
         }
     }
 
