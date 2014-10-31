@@ -88,7 +88,7 @@ public class Shooter extends Subsystem {
     }
     public boolean isHot() {
         try {
-        if (Integer.parseInt(SmartDashboard.getString("BLOB_COUNT", "0")) < 2) {
+        if (Integer.parseInt(SmartDashboard.getString("BLOB_COUNT", "0")) < 1) {
             return false;
         } else {
             return true;
